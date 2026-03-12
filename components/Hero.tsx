@@ -18,8 +18,8 @@ export default function Hero() {
           style={{ objectPosition: '35% center' }}
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-knakke-darker from-20% via-knakke-darker/60 via-45% to-black/20 to-80%" />
-        <div className="absolute inset-0 bg-gradient-to-t from-knakke-darker/60 via-transparent to-knakke-darker/20" />
+        <div className="absolute inset-0 bg-gradient-to-r from-knakke-darker from-25% via-knakke-darker/85 via-50% to-black/15 to-80%" />
+        <div className="absolute inset-0 bg-gradient-to-b from-knakke-darker/50 via-knakke-darker/30 to-knakke-darker/70" />
       </div>
 
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-16 lg:pt-36 lg:pb-24">
