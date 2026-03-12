@@ -41,10 +41,10 @@ export const STEPS = [
 ] as const
 
 export const MARKET_STATS = [
-  { value: 76, suffix: '%', label: 'der Bevölkerung erreicht Werbeartikel täglich' },
+  { value: 89, suffix: '%', label: 'der Bevölkerung erreicht Werbeartikel täglich' },
   { value: 62, suffix: '%', label: 'nutzen Werbeartikel länger als 1 Jahr' },
-  { value: 78, suffix: '%', label: 'Erinnerungswert an das beworbene Unternehmen' },
-  { value: 400, suffix: ' Mio.', label: 'Zollstöcke werden jährlich weltweit verkauft' },
+  { value: 70, suffix: '%', label: 'Erinnerungswert an das beworbene Unternehmen' },
+  { value: 150, suffix: ' Mio.', label: 'Zollstöcke werden jährlich weltweit verkauft' },
 ] as const
 
 export const FEATURES = [
