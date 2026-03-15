@@ -20,8 +20,8 @@ module.exports = {
         },
       },
       fontFamily: {
-        heading: ['"Outfit"', 'system-ui', 'sans-serif'],
-        body: ['"DM Sans"', 'system-ui', 'sans-serif'],
+        heading: ['var(--font-outfit)', '"Outfit"', 'system-ui', 'sans-serif'],
+        body: ['var(--font-dm-sans)', '"DM Sans"', 'system-ui', 'sans-serif'],
       },
     },
   },
