@@ -1,8 +1,7 @@
 'use client'
 
-import Image from 'next/image'
 import FadeIn from './FadeIn'
-import { IMAGES, WERBEARTIKEL_USPS } from '@/lib/constants'
+import { WERBEARTIKEL_USPS } from '@/lib/constants'
 
 export default function Werbeartikel() {
   return (
@@ -56,26 +55,32 @@ export default function Werbeartikel() {
             </FadeIn>
           </div>
 
-          {/* Images */}
+          {/* Videos */}
           <FadeIn direction="left">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="space-y-6">
               <div className="rounded-xl overflow-hidden border border-knakke-border">
-                <Image
-                  src={IMAGES.rohr1}
-                  alt="KNAKKE® bedruckt als Werbeartikel"
-                  width={400}
-                  height={300}
-                  className="w-full h-full object-cover"
-                />
+                <div className="relative w-full aspect-video">
+                  <iframe
+                    src="https://www.youtube-nocookie.com/embed/kTh6cKqixlU"
+                    title="KNAKKE® Key Visual"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="absolute inset-0 w-full h-full"
+                    loading="lazy"
+                  />
+                </div>
               </div>
-              <div className="rounded-xl overflow-hidden border border-knakke-border mt-8">
-                <Image
-                  src={IMAGES.rohr2}
-                  alt="KNAKKE® Meterstab mit Logo"
-                  width={400}
-                  height={300}
-                  className="w-full h-full object-cover"
-                />
+              <div className="rounded-xl overflow-hidden border border-knakke-border">
+                <div className="relative w-full aspect-video">
+                  <iframe
+                    src="https://www.youtube-nocookie.com/embed/z9UfrjxNNCk"
+                    title="KNAKKE® Anwendung"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="absolute inset-0 w-full h-full"
+                    loading="lazy"
+                  />
+                </div>
               </div>
             </div>
           </FadeIn>

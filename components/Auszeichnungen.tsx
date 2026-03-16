@@ -51,13 +51,25 @@ export default function Auszeichnungen() {
           </h3>
         </FadeIn>
 
-        <div className="grid sm:grid-cols-3 gap-4">
+        <div className="grid sm:grid-cols-3 gap-6">
           {TV_APPEARANCES.map((tv, i) => (
             <FadeIn key={tv.show} delay={i * 0.1}>
-              <div className="bg-knakke-card border border-knakke-border rounded-xl p-5 hover:border-knakke-lime/20 transition-all">
-                <p className="font-heading font-semibold text-white text-sm">{tv.channel}</p>
-                <p className="text-knakke-lime text-sm mt-1">{tv.show}</p>
-                <p className="text-xs text-gray-500 mt-2">{tv.date}</p>
+              <div className="bg-knakke-card border border-knakke-border rounded-xl overflow-hidden hover:border-knakke-lime/20 transition-all">
+                <div className="relative w-full aspect-video">
+                  <iframe
+                    src={`https://www.youtube-nocookie.com/embed/${tv.youtubeId}`}
+                    title={`${tv.channel} – ${tv.show}`}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="absolute inset-0 w-full h-full"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="p-4">
+                  <p className="font-heading font-semibold text-white text-sm">{tv.channel}</p>
+                  <p className="text-knakke-lime text-sm mt-1">{tv.show}</p>
+                  <p className="text-xs text-gray-500 mt-1">{tv.date}</p>
+                </div>
               </div>
             </FadeIn>
           ))}
