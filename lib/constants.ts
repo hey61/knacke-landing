@@ -171,9 +171,9 @@ export const AWARDS = [
 ] as const
 
 export const TV_APPEARANCES = [
-  { channel: 'MDR Thüringen', show: 'Einfach genial', date: '10.02.2015, 19:50 Uhr' },
-  { channel: 'MDR Thüringen Journal', show: 'iENA-Bericht', date: '28.10.2014, 19:30 Uhr' },
-  { channel: 'N24', show: 'Extratipps Business', date: 'Erstausstrahlung 04.04.2014' },
+  { channel: 'MDR Thüringen Journal', show: 'iENA-Bericht', date: '28.10.2014, 19:30 Uhr', youtubeId: 'mp4a_zMxI_E' },
+  { channel: 'Innovationspreis Thüringen', show: 'Nominierung', date: '2014', youtubeId: 'qoP06jSa474' },
+  { channel: 'N24', show: 'Extratipps Business', date: 'Erstausstrahlung 04.04.2014', youtubeId: 'ZiDF0Z37JX4' },
 ] as const
 
 export const FAQ_ITEMS = [
