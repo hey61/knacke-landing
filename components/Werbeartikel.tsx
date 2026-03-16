@@ -57,7 +57,7 @@ export default function Werbeartikel() {
 
           {/* Videos */}
           <FadeIn direction="left">
-            <div className="space-y-6">
+            <div className="space-y-4 max-w-sm ml-auto">
               <div className="rounded-xl overflow-hidden border border-knakke-border">
                 <div className="relative w-full aspect-video">
                   <iframe
