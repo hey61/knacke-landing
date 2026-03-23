@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import Image from 'next/image'
 import { NAV_LINKS } from '@/lib/constants'
 
 export default function Navbar() {
@@ -25,11 +26,15 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
-          <a href="#" className="flex items-center gap-2 group">
-            <span className="text-xl lg:text-2xl font-heading font-bold text-white tracking-tight">
-              KNAKKE
-              <span className="text-knakke-lime">®</span>
-            </span>
+          <a href="#" className="flex items-center gap-3 group">
+            <Image
+              src="/images/knakke-logo.svg"
+              alt="KNAKKE®"
+              width={180}
+              height={36}
+              className="h-8 lg:h-10 w-auto"
+              priority
+            />
             <span className="hidden sm:block text-[10px] text-knakke-muted uppercase tracking-[0.2em] mt-1">
               patentiert
             </span>
