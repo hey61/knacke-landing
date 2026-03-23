@@ -28,7 +28,7 @@ export default function Navbar() {
           {/* Logo */}
           <a href="#" className="flex items-center gap-3 group">
             <Image
-              src="/images/knakke-logo.svg"
+              src="/knakke-logo.svg"
               alt="KNAKKE®"
               width={180}
               height={36}
