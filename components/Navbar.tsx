@@ -32,7 +32,7 @@ export default function Navbar() {
               alt="KNAKKE®"
               width={180}
               height={36}
-              className="h-8 lg:h-10 w-auto"
+              className="h-5 lg:h-6 w-auto"
               priority
             />
             <span className="hidden sm:block text-[10px] text-knakke-muted uppercase tracking-[0.2em] mt-1">
