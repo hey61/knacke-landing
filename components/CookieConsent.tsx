@@ -1,32 +1,28 @@
 "use client";
 import { useState, useEffect } from "react";
-
-const CONSENT_KEY = "cookie-consent";
+import { getConsent, setConsent, EVENT_OPEN } from "./useConsent";
 
 export default function CookieConsent() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const consent = localStorage.getItem(CONSENT_KEY);
-    if (!consent) {
-      const timer = setTimeout(() => setVisible(true), 1000);
-      return () => clearTimeout(timer);
-    }
+    if (!getConsent()) setVisible(true);
+    const open = () => setVisible(true);
+    window.addEventListener(EVENT_OPEN, open);
+    return () => window.removeEventListener(EVENT_OPEN, open);
   }, []);
 
-  function accept(level: "all" | "essential") {
-    localStorage.setItem(CONSENT_KEY, JSON.stringify({ level, date: new Date().toISOString() }));
+  function choose(level: "all" | "essential") {
+    setConsent(level);
     setVisible(false);
-
-    if (level === "all") {
-      // Hier können später Analytics-Scripte aktiviert werden
-    }
   }
 
   if (!visible) return null;
 
   return (
     <div
+      role="dialog"
+      aria-label="Datenschutz-Einstellungen"
       style={{
         position: "fixed",
         bottom: 0,
@@ -48,20 +44,22 @@ export default function CookieConsent() {
         }}
       >
         <p style={{ color: "#ccc", fontSize: 14, lineHeight: 1.6, margin: "0 0 16px" }}>
-          Diese Website verwendet technisch notwendige Cookies. Weitere Cookies werden nur mit
-          Ihrer Zustimmung gesetzt.{" "}
+          Diese Website nutzt technisch notwendige Cookies. Eingebettete YouTube-Videos
+          werden erst geladen, wenn Sie externe Medien erlauben – dabei werden Daten an
+          Google übertragen. Sie können auch nur die notwendigen Funktionen nutzen.{" "}
           <a
             href="/datenschutz"
-            style={{ color: "#a3e635", textDecoration: "underline" }}
+            style={{ color: "#a8c800", textDecoration: "underline" }}
           >
             Datenschutzerklärung
           </a>
         </p>
         <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
           <button
-            onClick={() => accept("all")}
+            type="button"
+            onClick={() => choose("all")}
             style={{
-              background: "#a3e635",
+              background: "#a8c800",
               color: "#0a0a0a",
               border: "none",
               borderRadius: 8,
@@ -71,10 +69,11 @@ export default function CookieConsent() {
               cursor: "pointer",
             }}
           >
-            Alle akzeptieren
+            Externe Medien erlauben
           </button>
           <button
-            onClick={() => accept("essential")}
+            type="button"
+            onClick={() => choose("essential")}
             style={{
               background: "transparent",
               color: "#999",

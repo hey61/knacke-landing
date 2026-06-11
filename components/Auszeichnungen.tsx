@@ -1,6 +1,7 @@
 'use client'
 
 import FadeIn from './FadeIn'
+import ConsentGatedVideo from './ConsentGatedVideo'
 import { AWARDS, TV_APPEARANCES } from '@/lib/constants'
 
 export default function Auszeichnungen() {
@@ -55,16 +56,7 @@ export default function Auszeichnungen() {
           {TV_APPEARANCES.map((tv, i) => (
             <FadeIn key={tv.show} delay={i * 0.1}>
               <div className="bg-knakke-card border border-knakke-border rounded-xl overflow-hidden hover:border-knakke-lime/20 transition-all">
-                <div className="relative w-full aspect-video">
-                  <iframe
-                    src={`https://www.youtube-nocookie.com/embed/${tv.youtubeId}`}
-                    title={`${tv.channel} – ${tv.show}`}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    className="absolute inset-0 w-full h-full"
-                    loading="lazy"
-                  />
-                </div>
+                <ConsentGatedVideo videoId={tv.youtubeId} title={`${tv.channel} – ${tv.show}`} />
                 <div className="p-4">
                   <p className="font-heading font-semibold text-white text-sm">{tv.channel}</p>
                   <p className="text-knakke-lime text-sm mt-1">{tv.show}</p>

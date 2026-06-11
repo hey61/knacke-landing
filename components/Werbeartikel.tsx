@@ -1,6 +1,7 @@
 'use client'
 
 import FadeIn from './FadeIn'
+import ConsentGatedVideo from './ConsentGatedVideo'
 import { WERBEARTIKEL_USPS } from '@/lib/constants'
 
 export default function Werbeartikel() {
@@ -58,30 +59,8 @@ export default function Werbeartikel() {
           {/* Videos */}
           <FadeIn direction="left">
             <div className="space-y-4 max-w-sm ml-auto">
-              <div className="rounded-xl overflow-hidden border border-knakke-border">
-                <div className="relative w-full aspect-video">
-                  <iframe
-                    src="https://www.youtube-nocookie.com/embed/kTh6cKqixlU"
-                    title="KNAKKE® Key Visual"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    className="absolute inset-0 w-full h-full"
-                    loading="lazy"
-                  />
-                </div>
-              </div>
-              <div className="rounded-xl overflow-hidden border border-knakke-border">
-                <div className="relative w-full aspect-video">
-                  <iframe
-                    src="https://www.youtube-nocookie.com/embed/z9UfrjxNNCk"
-                    title="KNAKKE® Anwendung"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    className="absolute inset-0 w-full h-full"
-                    loading="lazy"
-                  />
-                </div>
-              </div>
+              <ConsentGatedVideo videoId="kTh6cKqixlU" title="KNAKKE® Key Visual" />
+              <ConsentGatedVideo videoId="z9UfrjxNNCk" title="KNAKKE® Anwendung" />
             </div>
           </FadeIn>
         </div>
