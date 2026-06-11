@@ -27,11 +27,44 @@ const BRANCHE_OPTIONS = [
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false)
   const [dsgvo, setDsgvo] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    // TODO: Connect to backend / email service
-    setSubmitted(true)
+    setError(null)
+
+    // Formulardaten synchron einlesen, bevor irgendein await passiert.
+    const fd = new FormData(e.currentTarget)
+    const payload = {
+      firma: fd.get('firma'),
+      name: fd.get('name'),
+      email: fd.get('email'),
+      telefon: fd.get('telefon'),
+      menge: fd.get('menge'),
+      branche: fd.get('branche'),
+      nachricht: fd.get('nachricht'),
+      website: fd.get('website'), // Honeypot
+      dsgvo,
+    }
+
+    setLoading(true)
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+      if (!res.ok) {
+        const j = await res.json().catch(() => null)
+        throw new Error(j?.error || 'Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.')
+      }
+      setSubmitted(true)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.')
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -77,8 +110,8 @@ export default function Contact() {
                   </div>
                   <div>
                     <p className="text-xs text-gray-500 uppercase tracking-wider">E-Mail</p>
-                    <a href="mailto:info@knakke.de" className="text-white hover:text-knakke-lime transition-colors">
-                      info@knakke.de
+                    <a href="mailto:info@zollstock-innovation.de" className="text-white hover:text-knakke-lime transition-colors">
+                      info@zollstock-innovation.de
                     </a>
                   </div>
                 </div>
@@ -124,10 +157,21 @@ export default function Contact() {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-5">
+                  {/* Honeypot – für Menschen unsichtbar, fängt Bots ab */}
+                  <input
+                    type="text"
+                    name="website"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    aria-hidden="true"
+                    style={{ position: 'absolute', left: '-9999px', width: 1, height: 1, opacity: 0 }}
+                  />
+
                   <div>
                     <label className="block text-sm text-gray-300 mb-1.5">Firma *</label>
                     <input
                       required
+                      name="firma"
                       type="text"
                       className="w-full bg-knakke-darker border border-knakke-border rounded-lg px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-knakke-lime/50 transition-colors"
                     />
@@ -136,6 +180,7 @@ export default function Contact() {
                     <label className="block text-sm text-gray-300 mb-1.5">Name *</label>
                     <input
                       required
+                      name="name"
                       type="text"
                       className="w-full bg-knakke-darker border border-knakke-border rounded-lg px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-knakke-lime/50 transition-colors"
                     />
@@ -144,6 +189,7 @@ export default function Contact() {
                     <label className="block text-sm text-gray-300 mb-1.5">E-Mail *</label>
                     <input
                       required
+                      name="email"
                       type="email"
                       className="w-full bg-knakke-darker border border-knakke-border rounded-lg px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-knakke-lime/50 transition-colors"
                     />
@@ -151,6 +197,7 @@ export default function Contact() {
                   <div>
                     <label className="block text-sm text-gray-300 mb-1.5">Telefon</label>
                     <input
+                      name="telefon"
                       type="tel"
                       className="w-full bg-knakke-darker border border-knakke-border rounded-lg px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-knakke-lime/50 transition-colors"
                     />
@@ -159,6 +206,7 @@ export default function Contact() {
                     <label className="block text-sm text-gray-300 mb-1.5">Gewünschte Menge *</label>
                     <select
                       required
+                      name="menge"
                       className="w-full bg-knakke-darker border border-knakke-border rounded-lg px-4 py-3 text-white focus:outline-none focus:border-knakke-lime/50 transition-colors"
                     >
                       {MENGEN.map((m) => (
@@ -170,7 +218,10 @@ export default function Contact() {
                   </div>
                   <div>
                     <label className="block text-sm text-gray-300 mb-1.5">Ihre Branche</label>
-                    <select className="w-full bg-knakke-darker border border-knakke-border rounded-lg px-4 py-3 text-white focus:outline-none focus:border-knakke-lime/50 transition-colors">
+                    <select
+                      name="branche"
+                      className="w-full bg-knakke-darker border border-knakke-border rounded-lg px-4 py-3 text-white focus:outline-none focus:border-knakke-lime/50 transition-colors"
+                    >
                       {BRANCHE_OPTIONS.map((b) => (
                         <option key={b} value={b.includes('optional') ? '' : b}>
                           {b}
@@ -181,6 +232,7 @@ export default function Contact() {
                   <div>
                     <label className="block text-sm text-gray-300 mb-1.5">Ihre Nachricht</label>
                     <textarea
+                      name="nachricht"
                       rows={4}
                       className="w-full bg-knakke-darker border border-knakke-border rounded-lg px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-knakke-lime/50 transition-colors resize-none"
                     />
@@ -203,12 +255,18 @@ export default function Contact() {
                     </span>
                   </label>
 
+                  {error && (
+                    <p className="text-sm text-red-400" role="alert">
+                      {error}
+                    </p>
+                  )}
+
                   <button
                     type="submit"
-                    disabled={!dsgvo}
+                    disabled={!dsgvo || loading}
                     className="w-full py-3.5 bg-knakke-lime text-knakke-darker font-semibold rounded-lg hover:bg-knakke-limeLight transition-all disabled:opacity-40 disabled:cursor-not-allowed"
                   >
-                    Angebot anfordern
+                    {loading ? 'Wird gesendet …' : 'Angebot anfordern'}
                   </button>
 
                   <p className="text-xs text-gray-600 text-center">

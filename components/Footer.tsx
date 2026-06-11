@@ -41,8 +41,8 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="mailto:info@knakke.de" className="hover:text-knakke-lime transition-colors">
-                  info@knakke.de
+                <a href="mailto:info@zollstock-innovation.de" className="hover:text-knakke-lime transition-colors">
+                  info@zollstock-innovation.de
                 </a>
               </li>
               <li>
