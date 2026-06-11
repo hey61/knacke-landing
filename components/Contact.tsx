@@ -63,7 +63,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <p className="text-xs text-gray-500 uppercase tracking-wider">Telefon</p>
-                    <a href="tel:+49363431554000" className="text-white hover:text-knakke-lime transition-colors">
+                    <a href="tel:+4936343155400" className="text-white hover:text-knakke-lime transition-colors">
                       +49 (3634) 31 55 400
                     </a>
                   </div>
